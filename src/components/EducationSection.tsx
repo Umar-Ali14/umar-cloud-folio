@@ -2,9 +2,9 @@ import { GraduationCap, Award, BookOpen } from 'lucide-react';
 
 const education = [
   {
-    degree: 'Bachelor of Business Information Technology',
-    institution: 'University Name',
-    period: '2021 - Present',
+    degree: 'Bachelor of Business & Information Technology',
+    institution: 'Punjab University Quaid e Azam, Lahore',
+    period: '2024 - 2028',
     description: 'Focusing on business applications of IT, software development, and cloud computing technologies.',
     icon: GraduationCap,
   },
@@ -12,15 +12,39 @@ const education = [
 
 const certifications = [
   {
-    name: 'AWS Cloud Practitioner',
-    issuer: 'Amazon Web Services',
-    status: 'In Progress',
+    name: 'Introduction to Cloud Computing',
+    issuer: 'IBM SkillBuild',
+    status: 'Completed',
     icon: Award,
   },
   {
-    name: 'Terraform Associate',
-    issuer: 'HashiCorp',
-    status: 'Planned',
+    name: 'Artificial Intelligence for Social Impact',
+    issuer: 'ADBInstitute',
+    status: 'Completed',
+    icon: Award,
+  },
+  {
+    name: 'AI for Business Professionals',
+    issuer: 'HP LIFE',
+    status: 'Completed',
+    icon: Award,
+  },
+  {
+    name: 'AWS Networking Basics V01.01.003',
+    issuer: 'Coursera',
+    status: 'Completed',
+    icon: Award,
+  },
+  {
+    name: 'AWS Zero To Hero Course',
+    issuer: 'trainwithshubham',
+    status: 'Completed',
+    icon: Award,
+  },
+  {
+    name: 'AWS Cloud Computing | AWS 3 in 1 Certification Course Bundle',
+    issuer: 'Kamyab Freelancer Program CM Punjab Pakistan',
+    status: 'In Progress',
     icon: Award,
   },
 ];

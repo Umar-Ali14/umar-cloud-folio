@@ -1,13 +1,19 @@
 import { ArrowDown, Download, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ParticleBackground from '@/components/ParticleBackground';
+import heroBackground from '@/assets/hero-background.avif';
 
 const HeroSection = () => {
   return (
     <section 
       id="hero" 
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: 'var(--gradient-hero)' }}
+      style={{ 
+        backgroundImage: `url(${heroBackground})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
     >
       <ParticleBackground />
       

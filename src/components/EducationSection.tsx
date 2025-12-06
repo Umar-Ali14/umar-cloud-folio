@@ -1,4 +1,6 @@
-import { GraduationCap, Award, BookOpen } from 'lucide-react';
+import { GraduationCap, Award, BookOpen, ExternalLink } from 'lucide-react';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import ibmCloudCertificate from '@/assets/certificates/ibm-cloud-certificate.jpg';
 
 const education = [
   {
@@ -16,6 +18,7 @@ const certifications = [
     issuer: 'IBM SkillBuild',
     status: 'Completed',
     icon: Award,
+    certificate: ibmCloudCertificate,
   },
   {
     name: 'Artificial Intelligence for Social Impact',
@@ -121,13 +124,31 @@ const EducationSection = () => {
                       <p className="text-sm text-muted-foreground">{cert.issuer}</p>
                     </div>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    cert.status === 'In Progress' 
-                      ? 'bg-primary/10 text-primary' 
-                      : 'bg-secondary text-muted-foreground'
-                  }`}>
-                    {cert.status}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    {cert.certificate && (
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <button className="p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+                            <ExternalLink className="w-4 h-4" />
+                          </button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-3xl">
+                          <img 
+                            src={cert.certificate} 
+                            alt={`${cert.name} Certificate`}
+                            className="w-full h-auto rounded-lg"
+                          />
+                        </DialogContent>
+                      </Dialog>
+                    )}
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      cert.status === 'In Progress' 
+                        ? 'bg-primary/10 text-primary' 
+                        : 'bg-secondary text-muted-foreground'
+                    }`}>
+                      {cert.status}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>

@@ -72,7 +72,7 @@ const HeroSection = () => {
             {/* Social Links */}
             <div className="flex items-center justify-center gap-4 pt-6 animate-fade-up animation-delay-800">
               <a 
-                href="https://github.com" 
+                href="https://github.com/Umar-Ali14" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-3 rounded-full bg-secondary hover:bg-primary/20 transition-colors duration-300 group"
@@ -81,7 +81,7 @@ const HeroSection = () => {
                 <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
               </a>
               <a 
-                href="https://linkedin.com" 
+                href="https://www.linkedin.com/in/umar-ali-043b13274/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-3 rounded-full bg-secondary hover:bg-primary/20 transition-colors duration-300 group"
@@ -90,7 +90,7 @@ const HeroSection = () => {
                 <Linkedin className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
               </a>
               <a 
-                href="mailto:umar@example.com"
+                href="mailto:meumaralli10@gmail.com"
                 className="p-3 rounded-full bg-secondary hover:bg-primary/20 transition-colors duration-300 group"
                 aria-label="Email"
               >

@@ -99,8 +99,8 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h3 className="font-display font-semibold text-foreground mb-1">Email</h3>
-                  <a href="mailto:umar@example.com" className="text-muted-foreground hover:text-primary transition-colors">
-                    umar@example.com
+                  <a href="mailto:meumaralli10@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
+                    meumaralli10@gmail.com
                   </a>
                 </div>
               </div>
@@ -123,7 +123,7 @@ const ContactSection = () => {
               <h3 className="font-display font-semibold text-foreground mb-4">Follow Me</h3>
               <div className="flex gap-4">
                 <a 
-                  href="https://github.com" 
+                  href="https://github.com/Umar-Ali14" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-12 h-12 rounded-xl bg-secondary hover:bg-primary/20 flex items-center justify-center transition-colors group"
@@ -132,22 +132,13 @@ const ContactSection = () => {
                   <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 </a>
                 <a 
-                  href="https://linkedin.com" 
+                  href="https://www.linkedin.com/in/umar-ali-043b13274/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="w-12 h-12 rounded-xl bg-secondary hover:bg-primary/20 flex items-center justify-center transition-colors group"
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                </a>
-                <a 
-                  href="https://twitter.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-xl bg-secondary hover:bg-primary/20 flex items-center justify-center transition-colors group"
-                  aria-label="Twitter"
-                >
-                  <Twitter className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 </a>
               </div>
             </div>

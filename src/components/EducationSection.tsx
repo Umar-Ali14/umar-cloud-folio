@@ -42,6 +42,7 @@ const certifications = [
     issuer: 'Coursera',
     status: 'Completed',
     icon: Award,
+    link: 'https://www.linkedin.com/posts/umar-ali-043b13274_aws-networking-basics-v010100s-activity-7375265087646846976-Xp5M',
   },
   {
     name: 'AWS Zero To Hero Course',
@@ -146,6 +147,16 @@ const EducationSection = () => {
                           />
                         </DialogContent>
                       </Dialog>
+                    )}
+                    {cert.link && !cert.certificate && (
+                      <a 
+                        href={cert.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
                     )}
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                       cert.status === 'In Progress' 

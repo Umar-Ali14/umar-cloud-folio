@@ -2,6 +2,7 @@ import { ArrowDown, Download, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ParticleBackground from '@/components/ParticleBackground';
 import heroBackground from '@/assets/hero-background.avif';
+import profilePhoto from '@/assets/profile-photo.jpg';
 
 const HeroSection = () => {
   return (
@@ -26,9 +27,11 @@ const HeroSection = () => {
           {/* Avatar */}
           <div className="relative mb-8 animate-fade-up">
             <div className="w-36 h-36 md:w-44 md:h-44 rounded-full bg-gradient-to-br from-primary to-primary-glow p-1 glow-effect">
-              <div className="w-full h-full rounded-full bg-card flex items-center justify-center overflow-hidden">
-                <span className="font-display text-4xl md:text-5xl font-bold gradient-text">UA</span>
-              </div>
+              <img 
+                src={profilePhoto} 
+                alt="Umar Ali" 
+                className="w-full h-full rounded-full object-cover"
+              />
             </div>
             <div className="absolute -bottom-2 -right-2 bg-primary rounded-full p-2 animate-float">
               <span className="text-lg">☁️</span>

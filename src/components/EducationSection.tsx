@@ -1,6 +1,9 @@
 import { GraduationCap, Award, BookOpen, ExternalLink } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import ibmCloudCertificate from '@/assets/certificates/ibm-cloud-certificate.jpg';
+import adbiAiCertificate from '@/assets/certificates/adbi-ai-social-impact-certificate.jpg';
+import hpAiCertificate from '@/assets/certificates/hp-ai-business-certificate.jpg';
+import awsZeroToHeroCertificate from '@/assets/certificates/aws-zero-to-hero-certificate.png';
 
 const education = [
   {
@@ -25,12 +28,14 @@ const certifications = [
     issuer: 'ADBInstitute',
     status: 'Completed',
     icon: Award,
+    certificate: adbiAiCertificate,
   },
   {
     name: 'AI for Business Professionals',
     issuer: 'HP LIFE',
     status: 'Completed',
     icon: Award,
+    certificate: hpAiCertificate,
   },
   {
     name: 'AWS Networking Basics V01.01.003',
@@ -43,6 +48,7 @@ const certifications = [
     issuer: 'trainwithshubham',
     status: 'Completed',
     icon: Award,
+    certificate: awsZeroToHeroCertificate,
   },
   {
     name: 'AWS Cloud Computing | AWS 3 in 1 Certification Course Bundle',

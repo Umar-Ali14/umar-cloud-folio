@@ -1,4 +1,4 @@
-import { Cloud, Database, Terminal, Code, Settings, Shield } from 'lucide-react';
+import { Cloud, Database, HardDrive, Code, Settings, Shield } from 'lucide-react';
 
 const skillCategories = [
   {
@@ -13,7 +13,7 @@ const skillCategories = [
   },
   {
     title: 'AWS Storage',
-    icon: Database,
+    icon: HardDrive,
     skills: [
       { name: 'S3', level: 85 },
       { name: 'Amazon EBS', level: 75 },

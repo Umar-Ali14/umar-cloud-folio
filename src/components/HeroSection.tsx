@@ -56,9 +56,9 @@ const HeroSection = () => {
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center justify-center gap-4 pt-4 animate-fade-up animation-delay-800">
               <Button variant="hero" size="lg" asChild>
-                <a href="#contact">
+                <a href="https://wa.me/923402355989" target="_blank" rel="noopener noreferrer">
                   <Mail className="w-5 h-5" />
-                  Hire Me
+                  Contact Me
                 </a>
               </Button>
               <Button variant="heroOutline" size="lg" asChild>

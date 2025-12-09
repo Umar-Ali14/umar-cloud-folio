@@ -50,7 +50,7 @@ const HeroSection = () => {
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-up animation-delay-600">
-              BBIT Student & Aspiring Cloud Architect building scalable solutions with AWS, Terraform, and modern infrastructure.
+              BBIT student and Junior Cloud Engineer building scalable, resilient systems—specializing in Cloud & DevOps (AWS, Terraform, CI/CD) and integrating AI-driven tools to optimize operations and accelerate delivery.
             </p>
 
             {/* CTA Buttons */}

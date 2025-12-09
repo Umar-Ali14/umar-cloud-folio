@@ -2,13 +2,43 @@ import { Cloud, Database, Terminal, Code, Settings, Shield } from 'lucide-react'
 
 const skillCategories = [
   {
-    title: 'Cloud Services',
+    title: 'AWS Compute',
     icon: Cloud,
     skills: [
-      { name: 'AWS EC2', level: 80 },
-      { name: 'AWS S3', level: 85 },
-      { name: 'AWS VPC', level: 75 },
-      { name: 'AWS IAM', level: 70 },
+      { name: 'EC2', level: 80 },
+      { name: 'AWS Lambda', level: 75 },
+      { name: 'Elastic Beanstalk', level: 70 },
+      { name: 'Amazon ECS', level: 65 },
+    ],
+  },
+  {
+    title: 'AWS Storage',
+    icon: Database,
+    skills: [
+      { name: 'S3', level: 85 },
+      { name: 'Amazon EBS', level: 75 },
+      { name: 'Amazon EFS', level: 70 },
+      { name: 'Amazon Glacier', level: 65 },
+    ],
+  },
+  {
+    title: 'AWS Networking',
+    icon: Shield,
+    skills: [
+      { name: 'VPC', level: 80 },
+      { name: 'Route 53', level: 70 },
+      { name: 'Elastic Load Balancing', level: 75 },
+      { name: 'AWS Direct Connect', level: 60 },
+    ],
+  },
+  {
+    title: 'AWS Database',
+    icon: Database,
+    skills: [
+      { name: 'Amazon RDS', level: 75 },
+      { name: 'Amazon DynamoDB', level: 70 },
+      { name: 'Amazon Aurora', level: 65 },
+      { name: 'Amazon Redshift', level: 60 },
     ],
   },
   {

@@ -1,4 +1,4 @@
-import { ArrowDown, Download, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ParticleBackground from '@/components/ParticleBackground';
 import heroBackground from '@/assets/hero-background.avif';
@@ -59,12 +59,6 @@ const HeroSection = () => {
                 <a href="https://wa.me/923402355989" target="_blank" rel="noopener noreferrer">
                   <Mail className="w-5 h-5" />
                   Contact Me
-                </a>
-              </Button>
-              <Button variant="heroOutline" size="lg" asChild>
-                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-                  <Download className="w-5 h-5" />
-                  Download Resume
                 </a>
               </Button>
             </div>

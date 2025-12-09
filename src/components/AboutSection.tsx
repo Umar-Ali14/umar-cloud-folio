@@ -40,7 +40,7 @@ const AboutSection = () => {
           {/* Text Content */}
           <div className="space-y-6">
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I'm <span className="text-foreground font-semibold">Umar Ali</span>, a Bachelor of Business Information Technology (BBIT) student with a deep passion for cloud computing and modern infrastructure solutions.
+              I'm <span className="text-foreground font-semibold">Umar Ali</span>, a Bachelor of Business Information Technology (BBIT) student driven by a deep passion for cloud computing, modern infrastructure, and AI-enabled DevOps workflows. I combine strong expertise in CI/CD, automation, and scalable cloud architectures with an active focus on integrating AI-driven tools to optimize cloud operations and accelerate development efficiency. I'm committed to growing as an AI-enabled Cloud & DevOps Engineer, delivering resilient, efficient, and future-ready solutions.
             </p>
             <p className="text-muted-foreground leading-relaxed">
               My journey into technology began with a curiosity about how systems work at scale. Today, I'm focused on becoming a Cloud Solutions Architect, mastering AWS services including EC2, S3, VPC, and IAM, while building a strong foundation in Infrastructure as Code with Terraform.

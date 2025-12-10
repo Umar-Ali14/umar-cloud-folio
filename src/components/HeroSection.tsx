@@ -1,6 +1,7 @@
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ParticleBackground from '@/components/ParticleBackground';
+import TypingAnimation from '@/components/TypingAnimation';
 import heroBackground from '@/assets/hero-background.avif';
 import profilePhoto from '@/assets/profile-photo.jpg';
 
@@ -41,7 +42,7 @@ const HeroSection = () => {
           {/* Text Content */}
           <div className="space-y-6 max-w-3xl">
             <p className="text-primary font-medium tracking-wider uppercase text-sm animate-fade-up animation-delay-200">
-              Cloud Solutions Architect
+              <TypingAnimation text="Cloud Solutions Architect" delay={800} speed={60} />
             </p>
             
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight animate-fade-up animation-delay-400">

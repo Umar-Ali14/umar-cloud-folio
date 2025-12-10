@@ -1,5 +1,6 @@
 import { GraduationCap, Award, BookOpen, ExternalLink } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import AnimatedSection from '@/components/AnimatedSection';
 import ibmCloudCertificate from '@/assets/certificates/ibm-cloud-certificate.jpg';
 import adbiAiCertificate from '@/assets/certificates/adbi-ai-social-impact-certificate.jpg';
 import hpAiCertificate from '@/assets/certificates/hp-ai-business-certificate.jpg';
@@ -72,17 +73,19 @@ const EducationSection = () => {
   return (
     <section id="education" className="section-padding">
       <div className="container-narrow">
-        <div className="text-center mb-16">
-          <p className="text-primary font-medium tracking-wider uppercase text-sm mb-4">
-            Education
-          </p>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-            Academic <span className="gradient-text">Background</span>
-          </h2>
-        </div>
+        <AnimatedSection animation="fade-up">
+          <div className="text-center mb-16">
+            <p className="text-primary font-medium tracking-wider uppercase text-sm mb-4">
+              Education
+            </p>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+              Academic <span className="gradient-text">Background</span>
+            </h2>
+          </div>
+        </AnimatedSection>
 
         <div className="grid lg:grid-cols-2 gap-8">
-          {/* Main Education */}
+          <AnimatedSection animation="fade-right" delay={100}>
           <div className="space-y-8">
             <h3 className="font-display text-xl font-semibold text-foreground flex items-center gap-3">
               <GraduationCap className="w-6 h-6 text-primary" />
@@ -170,8 +173,9 @@ const EducationSection = () => {
               ))}
             </div>
           </div>
+          </AnimatedSection>
 
-          {/* Relevant Courses */}
+          <AnimatedSection animation="fade-left" delay={200}>
           <div>
             <h3 className="font-display text-xl font-semibold text-foreground flex items-center gap-3 mb-8">
               <BookOpen className="w-6 h-6 text-primary" />
@@ -211,6 +215,7 @@ const EducationSection = () => {
               </div>
             </div>
           </div>
+          </AnimatedSection>
         </div>
       </div>
     </section>

@@ -62,11 +62,11 @@ const CloudBackground = () => {
       id: `icon-${i}`,
       x: Math.random() * dimensions.width,
       y: Math.random() * dimensions.height,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
+      vx: (Math.random() - 0.5) * 0.15,
+      vy: (Math.random() - 0.5) * 0.15,
       icon: AWS_ICONS[i % AWS_ICONS.length].name,
-      size: 24 + Math.random() * 16,
-      opacity: 0.08 + Math.random() * 0.12,
+      size: 28 + Math.random() * 20,
+      opacity: 0.06 + Math.random() * 0.08,
     }));
 
     const drawIcon = (icon: CloudIcon) => {
@@ -136,12 +136,12 @@ const CloudBackground = () => {
           icon.y = Math.max(padding, Math.min(dimensions.height - padding, icon.y));
         }
 
-        // Add slight random movement
-        icon.vx += (Math.random() - 0.5) * 0.01;
-        icon.vy += (Math.random() - 0.5) * 0.01;
+        // Add slight random movement for organic feel
+        icon.vx += (Math.random() - 0.5) * 0.005;
+        icon.vy += (Math.random() - 0.5) * 0.005;
 
-        // Limit velocity
-        const maxVel = 0.5;
+        // Limit velocity for slow, gentle movement
+        const maxVel = 0.25;
         icon.vx = Math.max(-maxVel, Math.min(maxVel, icon.vx));
         icon.vy = Math.max(-maxVel, Math.min(maxVel, icon.vy));
       });
@@ -169,8 +169,8 @@ const CloudBackground = () => {
       ref={canvasRef}
       width={dimensions.width}
       height={dimensions.height}
-      className="fixed inset-0 pointer-events-none"
-      style={{ zIndex: 0 }}
+      className="fixed inset-0 pointer-events-none blur-[0.5px]"
+      style={{ zIndex: 0, filter: 'blur(0.5px)' }}
       aria-hidden="true"
     />
   );

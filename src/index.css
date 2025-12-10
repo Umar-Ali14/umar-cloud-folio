@@ -76,13 +76,14 @@
 
 @layer components {
   .glass-card {
-    @apply bg-card/50 backdrop-blur-xl border border-border/50 rounded-xl transition-all duration-300 ease-out;
+    @apply bg-card/50 backdrop-blur-xl border border-border/50 rounded-xl transition-all duration-500 ease-out;
     box-shadow: var(--shadow-card);
   }
 
   .glass-card:hover {
-    @apply border-primary/60 scale-[1.02];
-    box-shadow: 0 0 20px hsl(var(--primary) / 0.3), 0 0 40px hsl(var(--primary) / 0.15), var(--shadow-card);
+    @apply border-primary/60;
+    box-shadow: 0 0 25px hsl(var(--primary) / 0.25), 0 0 50px hsl(var(--primary) / 0.1), var(--shadow-card);
+    transform: translateY(-4px);
   }
 
   .gradient-text {
@@ -96,12 +97,22 @@
 
   /* Global hover glow effect for cards and containers */
   .hover-glow {
-    @apply transition-all duration-300 ease-out;
+    @apply transition-all duration-500 ease-out;
   }
 
   .hover-glow:hover {
-    @apply border-primary/60 scale-[1.015];
-    box-shadow: 0 0 20px hsl(var(--primary) / 0.3), 0 0 40px hsl(var(--primary) / 0.15);
+    @apply border-primary/60;
+    box-shadow: 0 0 25px hsl(var(--primary) / 0.25), 0 0 50px hsl(var(--primary) / 0.1);
+    transform: translateY(-2px);
+  }
+
+  /* Neon glow effect for interactive elements */
+  .neon-glow:hover {
+    box-shadow: 
+      0 0 5px hsl(var(--primary) / 0.5),
+      0 0 15px hsl(var(--primary) / 0.3),
+      0 0 30px hsl(var(--primary) / 0.15),
+      inset 0 0 10px hsl(var(--primary) / 0.05);
   }
 
   .section-padding {
@@ -193,7 +204,33 @@
   }
 }
 
+@keyframes button-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 5px hsl(var(--primary) / 0.2);
+  }
+}
+
+@keyframes subtle-glow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 .particle {
   animation: particle-float var(--duration) linear infinite;
   animation-delay: var(--delay);
+}
+
+.animate-button-pulse {
+  animation: button-pulse 2s ease-in-out infinite;
+}
+
+.animate-subtle-glow {
+  animation: subtle-glow 3s ease-in-out infinite;
 }

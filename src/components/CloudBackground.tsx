@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
 interface CloudIcon {
   id: string;
@@ -25,6 +25,20 @@ const CloudBackground = () => {
   const iconsRef = useRef<CloudIcon[]>([]);
   const animationRef = useRef<number>();
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const [parallaxOffset, setParallaxOffset] = useState(0);
+
+  // Parallax scroll handler with smooth performance
+  const handleScroll = useCallback(() => {
+    const scrollY = window.scrollY;
+    // Move background at 30% of scroll speed for subtle parallax
+    setParallaxOffset(scrollY * 0.3);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
 
   useEffect(() => {
     const updateDimensions = () => {
@@ -170,7 +184,12 @@ const CloudBackground = () => {
       width={dimensions.width}
       height={dimensions.height}
       className="fixed inset-0 pointer-events-none blur-[0.5px]"
-      style={{ zIndex: 0, filter: 'blur(0.5px)' }}
+      style={{ 
+        zIndex: 0, 
+        filter: 'blur(0.5px)',
+        transform: `translate3d(0, ${-parallaxOffset}px, 0)`,
+        willChange: 'transform',
+      }}
       aria-hidden="true"
     />
   );

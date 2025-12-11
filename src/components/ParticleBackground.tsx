@@ -1,7 +1,20 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
 const ParticleBackground = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [parallaxOffset, setParallaxOffset] = useState(0);
+
+  // Parallax scroll handler - particles move at 20% of scroll speed
+  const handleScroll = useCallback(() => {
+    const scrollY = window.scrollY;
+    setParallaxOffset(scrollY * 0.2);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -37,6 +50,10 @@ const ParticleBackground = () => {
     <div 
       ref={containerRef} 
       className="absolute inset-0 overflow-hidden pointer-events-none"
+      style={{
+        transform: `translate3d(0, ${-parallaxOffset}px, 0)`,
+        willChange: 'transform',
+      }}
       aria-hidden="true"
     />
   );

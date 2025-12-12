@@ -27,7 +27,7 @@ const HeroSection = () => {
         <div className="flex flex-col items-center text-center">
           {/* Avatar */}
           <div className="relative mb-8 animate-fade-up">
-            <div className="w-36 h-36 md:w-44 md:h-44 rounded-full bg-background p-1 glow-effect">
+            <div className="w-36 h-36 md:w-44 md:h-44 rounded-full bg-white p-1 glow-effect">
               <img 
                 src={profilePhoto} 
                 alt="Umar Ali" 

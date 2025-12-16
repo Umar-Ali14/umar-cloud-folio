@@ -87,25 +87,6 @@ const CloudBackground = () => {
       });
     }
 
-    // Draw FREEFM text pattern as base layer
-    const drawTextPattern = () => {
-      ctx.save();
-      ctx.font = 'bold 80px Inter, sans-serif';
-      ctx.fillStyle = 'rgba(100, 150, 200, 0.03)';
-      
-      const text = 'FREEFM';
-      const textWidth = ctx.measureText(text).width;
-      const spacing = textWidth + 100;
-      const rowHeight = 100;
-      
-      for (let y = -rowHeight; y < dimensions.height + rowHeight; y += rowHeight) {
-        const offset = (y / rowHeight) % 2 === 0 ? 0 : spacing / 2;
-        for (let x = -spacing + offset; x < dimensions.width + spacing; x += spacing) {
-          ctx.fillText(text, x, y);
-        }
-      }
-      ctx.restore();
-    };
 
     // Draw a single particle with glow
     const drawParticle = (particle: Particle) => {
@@ -170,9 +151,6 @@ const CloudBackground = () => {
 
     const animate = () => {
       ctx.clearRect(0, 0, dimensions.width, dimensions.height);
-
-      // Draw text pattern base layer
-      drawTextPattern();
 
       // Update and draw particles
       particlesRef.current.forEach(particle => {

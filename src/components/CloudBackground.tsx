@@ -1,16 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 
-interface CloudNode {
-  id: number;
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  size: number;
-  isCloud: boolean;
-  glowIntensity: number;
-}
-
 interface Particle {
   x: number;
   y: number;
@@ -18,12 +7,20 @@ interface Particle {
   vy: number;
   size: number;
   opacity: number;
+  fadeDirection: number;
+}
+
+interface Connection {
+  startIndex: number;
+  endIndex: number;
+  opacity: number;
+  fadeDirection: number;
 }
 
 const CloudBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const nodesRef = useRef<CloudNode[]>([]);
   const particlesRef = useRef<Particle[]>([]);
+  const connectionsRef = useRef<Connection[]>([]);
   const animationRef = useRef<number>();
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [parallaxOffset, setParallaxOffset] = useState(0);
@@ -67,260 +64,154 @@ const CloudBackground = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Initialize cloud nodes
-    const nodeCount = 15;
-    nodesRef.current = Array.from({ length: nodeCount }, (_, i) => ({
-      id: i,
-      x: Math.random() * dimensions.width,
-      y: Math.random() * dimensions.height,
-      vx: (Math.random() - 0.5) * 0.12,
-      vy: (Math.random() - 0.5) * 0.12,
-      size: i < 3 ? 60 + Math.random() * 30 : 25 + Math.random() * 25,
-      isCloud: i < 8,
-      glowIntensity: 0.5 + Math.random() * 0.5,
-    }));
-
     // Initialize particles
-    const particleCount = 60;
+    const particleCount = 40;
     particlesRef.current = Array.from({ length: particleCount }, () => ({
       x: Math.random() * dimensions.width,
       y: Math.random() * dimensions.height,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      size: 1 + Math.random() * 2,
-      opacity: 0.3 + Math.random() * 0.5,
+      vx: (Math.random() - 0.5) * 0.15,
+      vy: (Math.random() - 0.5) * 0.15,
+      size: 2 + Math.random() * 3,
+      opacity: 0.2 + Math.random() * 0.4,
+      fadeDirection: Math.random() > 0.5 ? 1 : -1,
     }));
 
-    const drawCloud = (x: number, y: number, size: number, glowIntensity: number) => {
+    // Initialize some random connections
+    connectionsRef.current = [];
+    for (let i = 0; i < 15; i++) {
+      connectionsRef.current.push({
+        startIndex: Math.floor(Math.random() * particleCount),
+        endIndex: Math.floor(Math.random() * particleCount),
+        opacity: Math.random() * 0.3,
+        fadeDirection: Math.random() > 0.5 ? 1 : -1,
+      });
+    }
+
+    // Draw FREEFM text pattern as base layer
+    const drawTextPattern = () => {
       ctx.save();
+      ctx.font = 'bold 80px Inter, sans-serif';
+      ctx.fillStyle = 'rgba(100, 150, 200, 0.03)';
       
-      // Glow effect
-      ctx.shadowColor = `rgba(0, 200, 255, ${glowIntensity * 0.8})`;
-      ctx.shadowBlur = 20;
+      const text = 'FREEFM';
+      const textWidth = ctx.measureText(text).width;
+      const spacing = textWidth + 100;
+      const rowHeight = 100;
       
-      ctx.strokeStyle = `rgba(0, 200, 255, ${glowIntensity * 0.6})`;
-      ctx.lineWidth = 1.5;
-      
-      // Cloud shape using bezier curves
-      ctx.beginPath();
-      const cloudWidth = size;
-      const cloudHeight = size * 0.6;
-      
-      // Main cloud body
-      ctx.moveTo(x - cloudWidth * 0.4, y + cloudHeight * 0.2);
-      
-      // Left bump
-      ctx.bezierCurveTo(
-        x - cloudWidth * 0.5, y - cloudHeight * 0.2,
-        x - cloudWidth * 0.2, y - cloudHeight * 0.4,
-        x, y - cloudHeight * 0.3
-      );
-      
-      // Top center bump (bigger)
-      ctx.bezierCurveTo(
-        x + cloudWidth * 0.1, y - cloudHeight * 0.5,
-        x + cloudWidth * 0.3, y - cloudHeight * 0.5,
-        x + cloudWidth * 0.35, y - cloudHeight * 0.2
-      );
-      
-      // Right bump
-      ctx.bezierCurveTo(
-        x + cloudWidth * 0.5, y - cloudHeight * 0.15,
-        x + cloudWidth * 0.5, y + cloudHeight * 0.2,
-        x + cloudWidth * 0.4, y + cloudHeight * 0.2
-      );
-      
-      // Bottom flat
-      ctx.lineTo(x - cloudWidth * 0.4, y + cloudHeight * 0.2);
-      
-      ctx.stroke();
-      ctx.restore();
-    };
-
-    const drawConnectionNode = (x: number, y: number, size: number) => {
-      ctx.save();
-      
-      // Outer glow
-      ctx.shadowColor = 'rgba(0, 200, 255, 0.8)';
-      ctx.shadowBlur = 15;
-      
-      // Node circle
-      ctx.beginPath();
-      ctx.arc(x, y, size / 4, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0, 200, 255, 0.3)';
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(0, 200, 255, 0.7)';
-      ctx.lineWidth = 1;
-      ctx.stroke();
-      
-      // Inner bright dot
-      ctx.beginPath();
-      ctx.arc(x, y, size / 10, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-      ctx.fill();
-      
-      ctx.restore();
-    };
-
-    const drawConnections = () => {
-      const nodes = nodesRef.current;
-      const connectionDistance = 300;
-
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[j].x - nodes[i].x;
-          const dy = nodes[j].y - nodes[i].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < connectionDistance) {
-            const opacity = (1 - distance / connectionDistance) * 0.4;
-            
-            ctx.save();
-            ctx.strokeStyle = `rgba(0, 200, 255, ${opacity})`;
-            ctx.lineWidth = 1;
-            
-            // Glow effect for lines
-            ctx.shadowColor = 'rgba(0, 200, 255, 0.5)';
-            ctx.shadowBlur = 5;
-            
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.stroke();
-            
-            // Draw glowing dots along the line
-            const dotCount = Math.floor(distance / 50);
-            for (let d = 1; d < dotCount; d++) {
-              const t = d / dotCount;
-              const dotX = nodes[i].x + dx * t;
-              const dotY = nodes[i].y + dy * t;
-              
-              ctx.beginPath();
-              ctx.arc(dotX, dotY, 2, 0, Math.PI * 2);
-              ctx.fillStyle = `rgba(0, 200, 255, ${opacity * 0.8})`;
-              ctx.fill();
-            }
-            
-            ctx.restore();
-          }
+      for (let y = -rowHeight; y < dimensions.height + rowHeight; y += rowHeight) {
+        const offset = (y / rowHeight) % 2 === 0 ? 0 : spacing / 2;
+        for (let x = -spacing + offset; x < dimensions.width + spacing; x += spacing) {
+          ctx.fillText(text, x, y);
         }
       }
+      ctx.restore();
     };
 
-    const drawParticles = () => {
-      particlesRef.current.forEach(particle => {
+    // Draw a single particle with glow
+    const drawParticle = (particle: Particle) => {
+      ctx.save();
+      
+      // Soft glow
+      ctx.shadowColor = `rgba(150, 180, 220, ${particle.opacity})`;
+      ctx.shadowBlur = 10;
+      
+      ctx.beginPath();
+      ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(180, 200, 230, ${particle.opacity})`;
+      ctx.fill();
+      
+      // Inner bright core
+      ctx.beginPath();
+      ctx.arc(particle.x, particle.y, particle.size * 0.4, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(220, 230, 250, ${particle.opacity * 1.2})`;
+      ctx.fill();
+      
+      ctx.restore();
+    };
+
+    // Draw connections with fade effect
+    const drawConnections = () => {
+      const particles = particlesRef.current;
+      
+      connectionsRef.current.forEach(connection => {
+        const start = particles[connection.startIndex];
+        const end = particles[connection.endIndex];
+        
+        if (!start || !end || connection.opacity <= 0) return;
+        
+        const dx = end.x - start.x;
+        const dy = end.y - start.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        // Only draw if within reasonable distance
+        if (distance > 400) return;
+        
         ctx.save();
-        ctx.shadowColor = 'rgba(0, 200, 255, 0.8)';
+        
+        // Gradient line
+        const gradient = ctx.createLinearGradient(start.x, start.y, end.x, end.y);
+        gradient.addColorStop(0, `rgba(150, 180, 220, ${connection.opacity * 0.5})`);
+        gradient.addColorStop(0.5, `rgba(180, 200, 230, ${connection.opacity})`);
+        gradient.addColorStop(1, `rgba(150, 180, 220, ${connection.opacity * 0.5})`);
+        
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 1;
+        ctx.shadowColor = 'rgba(150, 180, 220, 0.3)';
         ctx.shadowBlur = 5;
         
         ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 200, 255, ${particle.opacity})`;
-        ctx.fill();
+        ctx.moveTo(start.x, start.y);
+        ctx.lineTo(end.x, end.y);
+        ctx.stroke();
+        
         ctx.restore();
       });
-    };
-
-    const drawHorizonGrid = () => {
-      const horizonY = dimensions.height * 0.85;
-      const gridSpacing = 60;
-      
-      ctx.save();
-      ctx.strokeStyle = 'rgba(0, 200, 255, 0.15)';
-      ctx.lineWidth = 1;
-      ctx.shadowColor = 'rgba(0, 200, 255, 0.3)';
-      ctx.shadowBlur = 3;
-      
-      // Horizontal lines with perspective
-      for (let i = 0; i < 8; i++) {
-        const y = horizonY + i * (gridSpacing * (1 + i * 0.3));
-        const opacity = 0.15 * (1 - i / 8);
-        ctx.strokeStyle = `rgba(0, 200, 255, ${opacity})`;
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(dimensions.width, y);
-        ctx.stroke();
-      }
-      
-      // Vertical lines converging to center
-      const centerX = dimensions.width / 2;
-      for (let i = -10; i <= 10; i++) {
-        const startX = centerX + i * gridSpacing * 4;
-        const endX = centerX + i * gridSpacing * 0.5;
-        ctx.strokeStyle = `rgba(0, 200, 255, ${0.1 - Math.abs(i) * 0.008})`;
-        ctx.beginPath();
-        ctx.moveTo(startX, dimensions.height);
-        ctx.lineTo(endX, horizonY);
-        ctx.stroke();
-      }
-      
-      // Horizon glow line
-      const gradient = ctx.createLinearGradient(0, horizonY - 50, 0, horizonY + 50);
-      gradient.addColorStop(0, 'rgba(0, 200, 255, 0)');
-      gradient.addColorStop(0.5, 'rgba(0, 200, 255, 0.3)');
-      gradient.addColorStop(1, 'rgba(0, 200, 255, 0)');
-      
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, horizonY - 50, dimensions.width, 100);
-      
-      ctx.restore();
     };
 
     const animate = () => {
       ctx.clearRect(0, 0, dimensions.width, dimensions.height);
 
-      // Draw horizon grid first (background layer)
-      drawHorizonGrid();
+      // Draw text pattern base layer
+      drawTextPattern();
 
       // Update and draw particles
       particlesRef.current.forEach(particle => {
+        // Slow movement
         particle.x += particle.vx;
         particle.y += particle.vy;
 
-        if (particle.x < 0) particle.x = dimensions.width;
-        if (particle.x > dimensions.width) particle.x = 0;
-        if (particle.y < 0) particle.y = dimensions.height;
-        if (particle.y > dimensions.height) particle.y = 0;
-      });
-      drawParticles();
+        // Wrap around edges
+        if (particle.x < -20) particle.x = dimensions.width + 20;
+        if (particle.x > dimensions.width + 20) particle.x = -20;
+        if (particle.y < -20) particle.y = dimensions.height + 20;
+        if (particle.y > dimensions.height + 20) particle.y = -20;
 
-      // Update node positions
-      nodesRef.current.forEach(node => {
-        node.x += node.vx;
-        node.y += node.vy;
-
-        const padding = 80;
-        if (node.x < padding || node.x > dimensions.width - padding) {
-          node.vx *= -1;
-          node.x = Math.max(padding, Math.min(dimensions.width - padding, node.x));
-        }
-        if (node.y < padding || node.y > dimensions.height - padding) {
-          node.vy *= -1;
-          node.y = Math.max(padding, Math.min(dimensions.height - padding, node.y));
+        // Gentle fade in/out
+        particle.opacity += particle.fadeDirection * 0.002;
+        if (particle.opacity >= 0.6) {
+          particle.fadeDirection = -1;
+        } else if (particle.opacity <= 0.15) {
+          particle.fadeDirection = 1;
         }
 
-        node.vx += (Math.random() - 0.5) * 0.003;
-        node.vy += (Math.random() - 0.5) * 0.003;
-
-        const maxVel = 0.2;
-        node.vx = Math.max(-maxVel, Math.min(maxVel, node.vx));
-        node.vy = Math.max(-maxVel, Math.min(maxVel, node.vy));
-
-        // Pulse glow intensity
-        node.glowIntensity = 0.5 + Math.sin(Date.now() / 2000 + node.id) * 0.3;
+        drawParticle(particle);
       });
 
-      // Draw connections
+      // Update and draw connections
+      connectionsRef.current.forEach(connection => {
+        // Fade in/out
+        connection.opacity += connection.fadeDirection * 0.003;
+        if (connection.opacity >= 0.35) {
+          connection.fadeDirection = -1;
+        } else if (connection.opacity <= 0.02) {
+          connection.fadeDirection = 1;
+          // Randomly reassign connection targets for variety
+          connection.startIndex = Math.floor(Math.random() * particlesRef.current.length);
+          connection.endIndex = Math.floor(Math.random() * particlesRef.current.length);
+        }
+      });
+      
       drawConnections();
-
-      // Draw nodes (clouds and connection points)
-      nodesRef.current.forEach(node => {
-        if (node.isCloud) {
-          drawCloud(node.x, node.y, node.size, node.glowIntensity);
-        } else {
-          drawConnectionNode(node.x, node.y, node.size);
-        }
-      });
 
       animationRef.current = requestAnimationFrame(animate);
     };

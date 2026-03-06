@@ -119,7 +119,7 @@ const ParticleNetwork = () => {
         height: '100%',
         zIndex: 0,
         pointerEvents: 'none',
-        opacity: 0.5,
+        opacity: 0.75,
       }}
       aria-hidden="true"
     />

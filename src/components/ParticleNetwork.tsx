@@ -76,7 +76,7 @@ const ParticleNetwork = () => {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 0.6)`;
+        ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 0.9)`;
         ctx.fill();
       }
 
@@ -87,7 +87,7 @@ const ParticleNetwork = () => {
           const dy = particles[j].y - particles[i].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 140) {
-            const opacity = (1 - dist / 140) * 0.4;
+            const opacity = (1 - dist / 140) * 0.7;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -119,7 +119,7 @@ const ParticleNetwork = () => {
         height: '100%',
         zIndex: 0,
         pointerEvents: 'none',
-        opacity: 0.5,
+        opacity: 0.75,
       }}
       aria-hidden="true"
     />

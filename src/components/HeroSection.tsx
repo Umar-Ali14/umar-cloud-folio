@@ -44,7 +44,7 @@ const HeroSection = () => {
               <TypewriterCycle />
             </p>
             
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight animate-fade-up animation-delay-400">
+            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight hero-stagger" style={{ '--stagger-delay': '0.5s' } as React.CSSProperties}>
               Hi, I'm{' '}
               <span className="gradient-text">Umar Ali</span>
             </h1>

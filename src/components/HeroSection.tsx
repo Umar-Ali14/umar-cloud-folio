@@ -1,7 +1,6 @@
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import ParticleBackground from '@/components/ParticleBackground';
-import TypingAnimation from '@/components/TypingAnimation';
+import TypewriterCycle from '@/components/TypewriterCycle';
 import heroBackground from '@/assets/hero-background.avif';
 import profilePhoto from '@/assets/profile-photo.jpg';
 
@@ -17,7 +16,7 @@ const HeroSection = () => {
         backgroundRepeat: 'no-repeat'
       }}
     >
-      <ParticleBackground />
+      
       
       {/* Glow Effects */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-slow" />
@@ -26,7 +25,7 @@ const HeroSection = () => {
       <div className="container-narrow relative z-10 px-4 py-20">
         <div className="flex flex-col items-center text-center">
           {/* Avatar */}
-          <div className="relative mb-8 animate-fade-up">
+          <div className="relative mb-8 hero-stagger" style={{ '--stagger-delay': '0.3s' } as React.CSSProperties}>
             <div className="w-36 h-36 md:w-44 md:h-44 rounded-full bg-white p-1 glow-effect">
               <img 
                 src={profilePhoto} 
@@ -41,21 +40,21 @@ const HeroSection = () => {
 
           {/* Text Content */}
           <div className="space-y-6 max-w-3xl">
-            <p className="text-primary font-medium tracking-wider uppercase text-sm animate-fade-up animation-delay-200">
-              <TypingAnimation text="Cloud Solutions Architect" delay={800} speed={60} cursor={false} />
+            <p className="text-primary font-medium tracking-wider uppercase text-sm hero-stagger" style={{ '--stagger-delay': '0.7s' } as React.CSSProperties}>
+              <TypewriterCycle />
             </p>
             
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight animate-fade-up animation-delay-400">
+            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight hero-stagger" style={{ '--stagger-delay': '0.5s' } as React.CSSProperties}>
               Hi, I'm{' '}
               <span className="gradient-text">Umar Ali</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-up animation-delay-600">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed hero-stagger" style={{ '--stagger-delay': '0.9s' } as React.CSSProperties}>
               BBIT student and Junior Cloud Engineer building scalable, resilient systems—specializing in Cloud & DevOps (AWS, Terraform, CI/CD) and integrating AI-driven tools to optimize operations and accelerate delivery.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-4 animate-fade-up animation-delay-800">
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-4 hero-stagger" style={{ '--stagger-delay': '1.1s' } as React.CSSProperties}>
               <Button variant="hero" size="lg" asChild>
                 <a href="https://wa.me/923402355989" target="_blank" rel="noopener noreferrer">
                   <Mail className="w-5 h-5" />
@@ -65,7 +64,7 @@ const HeroSection = () => {
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center justify-center gap-4 pt-6 animate-fade-up animation-delay-800">
+            <div className="flex items-center justify-center gap-4 pt-6 hero-stagger" style={{ '--stagger-delay': '1.3s' } as React.CSSProperties}>
               <a 
                 href="https://github.com/Umar-Ali14" 
                 target="_blank" 

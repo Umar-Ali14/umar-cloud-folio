@@ -49,7 +49,7 @@ const HeroSection = () => {
               <span className="gradient-text">Umar Ali</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-up animation-delay-600">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed hero-stagger" style={{ '--stagger-delay': '0.9s' } as React.CSSProperties}>
               BBIT student and Junior Cloud Engineer building scalable, resilient systems—specializing in Cloud & DevOps (AWS, Terraform, CI/CD) and integrating AI-driven tools to optimize operations and accelerate delivery.
             </p>
 

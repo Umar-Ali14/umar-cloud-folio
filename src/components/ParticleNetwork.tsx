@@ -87,7 +87,7 @@ const ParticleNetwork = () => {
           const dy = particles[j].y - particles[i].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 140) {
-            const opacity = (1 - dist / 140) * 0.4;
+            const opacity = (1 - dist / 140) * 0.7;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);

@@ -54,7 +54,7 @@ const HeroSection = () => {
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-4 animate-fade-up animation-delay-800">
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-4 hero-stagger" style={{ '--stagger-delay': '1.1s' } as React.CSSProperties}>
               <Button variant="hero" size="lg" asChild>
                 <a href="https://wa.me/923402355989" target="_blank" rel="noopener noreferrer">
                   <Mail className="w-5 h-5" />

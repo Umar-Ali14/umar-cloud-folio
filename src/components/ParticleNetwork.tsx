@@ -76,7 +76,7 @@ const ParticleNetwork = () => {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 0.6)`;
+        ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 0.9)`;
         ctx.fill();
       }
 

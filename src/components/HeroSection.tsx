@@ -1,7 +1,6 @@
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import ParticleBackground from '@/components/ParticleBackground';
-import TypingAnimation from '@/components/TypingAnimation';
+import TypewriterCycle from '@/components/TypewriterCycle';
 import heroBackground from '@/assets/hero-background.avif';
 import profilePhoto from '@/assets/profile-photo.jpg';
 

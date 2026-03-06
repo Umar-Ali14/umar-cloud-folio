@@ -281,3 +281,27 @@
 .animate-subtle-glow {
   animation: subtle-glow 3s ease-in-out infinite;
 }
+
+/* Cursor blink for typewriter */
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Hero staggered entrance */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-stagger {
+  opacity: 0;
+  animation: heroFadeUp 0.7s ease forwards;
+  animation-delay: var(--stagger-delay, 0s);
+}

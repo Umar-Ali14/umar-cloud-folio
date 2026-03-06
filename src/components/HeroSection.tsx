@@ -25,7 +25,7 @@ const HeroSection = () => {
       <div className="container-narrow relative z-10 px-4 py-20">
         <div className="flex flex-col items-center text-center">
           {/* Avatar */}
-          <div className="relative mb-8 animate-fade-up">
+          <div className="relative mb-8 hero-stagger" style={{ '--stagger-delay': '0.3s' } as React.CSSProperties}>
             <div className="w-36 h-36 md:w-44 md:h-44 rounded-full bg-white p-1 glow-effect">
               <img 
                 src={profilePhoto} 

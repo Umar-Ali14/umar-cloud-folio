@@ -64,7 +64,7 @@ const HeroSection = () => {
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center justify-center gap-4 pt-6 animate-fade-up animation-delay-800">
+            <div className="flex items-center justify-center gap-4 pt-6 hero-stagger" style={{ '--stagger-delay': '1.3s' } as React.CSSProperties}>
               <a 
                 href="https://github.com/Umar-Ali14" 
                 target="_blank" 

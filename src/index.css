@@ -305,3 +305,67 @@
   animation: heroFadeUp 0.7s ease forwards;
   animation-delay: var(--stagger-delay, 0s);
 }
+
+/* Hero photo glow */
+.hero-photo-glow {
+  box-shadow: 0 0 30px hsl(var(--primary) / 0.5), 0 0 60px hsl(var(--primary) / 0.2);
+}
+
+/* Hero float animation */
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-hero-float {
+  animation: heroFloat 3s ease-in-out infinite;
+}
+
+/* Rotating gradient border */
+@keyframes rotateBorder {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.hero-rotating-border {
+  background: conic-gradient(
+    hsl(var(--primary)),
+    hsl(var(--primary-glow)),
+    hsl(var(--primary) / 0.2),
+    hsl(var(--primary-glow)),
+    hsl(var(--primary))
+  );
+  animation: rotateBorder 4s linear infinite;
+  border-radius: 9999px;
+}
+
+/* CTA shimmer sweep */
+@keyframes shimmerSweep {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+.hero-shimmer-btn {
+  position: relative;
+  overflow: hidden;
+}
+.hero-shimmer-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transition: none;
+  pointer-events: none;
+}
+.hero-shimmer-btn:hover::after {
+  animation: shimmerSweep 0.6s ease forwards;
+}
+
+/* Scroll arrow bounce */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+.hero-scroll-arrow {
+  animation: scrollBounce 2s ease-in-out infinite;
+}

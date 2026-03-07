@@ -57,8 +57,8 @@ const HeroSection = () => {
               <span className="gradient-text">Umar Ali</span>
             </h1>
 
-            <p className="text-primary font-medium tracking-wider uppercase text-sm hero-stagger" style={{ '--stagger-delay': '0.7s' } as React.CSSProperties}>
-              <TypewriterCycle />
+            <p className="text-foreground font-medium tracking-wider uppercase text-sm hero-stagger" style={{ '--stagger-delay': '0.7s' } as React.CSSProperties}>
+              AWS CLOUD ENGINEERING
             </p>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed hero-stagger" style={{ '--stagger-delay': '0.9s' } as React.CSSProperties}>

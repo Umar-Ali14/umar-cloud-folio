@@ -89,13 +89,6 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Scroll Indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hero-scroll-arrow">
-            <a href="#about" aria-label="Scroll to About section" className="flex flex-col items-center gap-1">
-              <span className="text-xs text-muted-foreground tracking-widest uppercase">Scroll</span>
-              <ArrowDown className="w-5 h-5 text-muted-foreground" />
-            </a>
-          </div>
         </div>
       </div>
     </section>
